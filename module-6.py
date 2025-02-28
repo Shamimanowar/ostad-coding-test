@@ -35,7 +35,7 @@ def is_power_of_5(n: int) -> bool:
 
 
 # Task-2 Solution
-def find_kth_character_recursive(k, word="a"):
+def find_kth_character(k, word="a"):
     if len(word) >= k:
         return word[k - 1]
     
@@ -47,7 +47,7 @@ def find_kth_character_recursive(k, word="a"):
             next_char = chr(ord(char) + 1)
         next_word += next_char
     
-    return find_kth_character_recursive(k, word + next_word)
+    return find_kth_character(k, word + next_word)
 
 
 
