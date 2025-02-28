@@ -35,20 +35,19 @@ def is_power_of_5(n: int) -> bool:
 
 
 # Task-2 Solution
-def find_kth_character(k):
-    word = "a"
+def find_kth_character_recursive(k, word="a"):
+    if len(word) >= k:
+        return word[k - 1]
     
-    while len(word) < k:
-        next_word = ""
-        for char in word:
-            if char == 'z':
-                next_char = 'a'
-            else:
-                next_char = chr(ord(char) + 1)
-            next_word += next_char
-        word += next_word
-        
-    return word[k-1]
+    next_word = ""
+    for char in word:
+        if char == 'z':
+            next_char = 'a'
+        else:
+            next_char = chr(ord(char) + 1)
+        next_word += next_char
+    
+    return find_kth_character_recursive(k, word + next_word)
 
 
 
@@ -83,8 +82,8 @@ def test_find_kth_character():
         {"serial_number": 3, "input": 1, "expected_output": "a"},
         {"serial_number": 4, "input": 2, "expected_output": "b"},
         {"serial_number": 5, "input": 3, "expected_output": "b"},
-        {"serial_number": 6, "input": 7, "expected_output": "b"},
-        {"serial_number": 7, "input": 12, "expected_output": "c"}
+        {"serial_number": 6, "input": 7, "expected_output": "b"}, # False test case
+        {"serial_number": 7, "input": 12, "expected_output": "c"} # False test case
     ]
     
     for case in test_cases:
