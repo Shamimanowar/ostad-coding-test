@@ -49,7 +49,15 @@ def find_kth_character(k, word="a"):
     
     return find_kth_character(k, word + next_word)
 
-
+# Alternative Solution
+def kth_character(k:int, word='a') -> str:
+    if len(word) >= k:
+        return word[k-1]
+    else:
+        # new_word = [chr(((ord(ch) - 96)%26) + 97) for ch in word]
+        new_word = [chr(ord(ch)+1) if ch != 'z' else 'a' for ch in word]
+    word += "".join(new_word)
+    return kth_character(k, word)
 
 # ********************************* Test Functions ***********************************
 
@@ -82,8 +90,8 @@ def test_find_kth_character():
         {"serial_number": 3, "input": 1, "expected_output": "a"},
         {"serial_number": 4, "input": 2, "expected_output": "b"},
         {"serial_number": 5, "input": 3, "expected_output": "b"},
-        {"serial_number": 6, "input": 7, "expected_output": "b"}, # False test case
-        {"serial_number": 7, "input": 12, "expected_output": "c"} # False test case
+        # {"serial_number": 6, "input": 7, "expected_output": "b"}, # False test case
+        # {"serial_number": 7, "input": 12, "expected_output": "c"} # False test case
     ]
     
     for case in test_cases:
