@@ -1,13 +1,31 @@
 
-def next_smaller_elements(n, arr):
-    result = [-1] * n
-    stack = [] 
+# def next_smaller_elements(n, arr):
+#     result = [-1] * n
+#     stack = [] 
 
-    for i in range(n):
-        while stack and arr[i] < arr[stack[-1]]:
-            result[stack.pop()] = arr[i]
-        stack.append(i)
+#     for i in range(n):
+#         while stack and arr[i] < arr[stack[-1]]:
+#             result[stack.pop()] = arr[i]
+#         stack.append(i)
 
+#     return result
+
+def next_smaller_elements(arr):
+    n = len(arr)
+    result = [-1] * n 
+    stack = []
+
+
+    for i in range(n - 1, -1, -1):
+
+        while stack and stack[-1] >= arr[i]:
+            stack.pop()
+        
+        if stack:
+            result[i] = stack[-1]
+        
+        stack.append(arr[i])
+    
     return result
 
 
@@ -48,3 +66,22 @@ class QueueUsingTwoStacks:
     def get_data(self):
         print(f"Push stack = {self.push_stack} and Pop stack = {self.pop_stack}")
         return self._shift_push_to_pop_stack()
+    
+if __name__ == "__main__":
+    sol = QueueUsingTwoStacks()
+
+    sol.enqueue(1) 
+    sol.enqueue(3)
+    sol.enqueue(5)
+
+
+    sol.front()
+    sol.get_data()
+    sol.dequeue()
+    sol.get_data()
+    sol.dequeue()
+    sol.dequeue()
+    sol.dequeue()
+    sol.dequeue()
+    sol.enqueue(1)
+    sol.get_data()
