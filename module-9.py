@@ -11,6 +11,25 @@ def manage_patients(n:int, patients: List):
                 patients[j], patients[j + 1] = patients[j + 1], patients[j]
 
 
+def facebook_likes(n, m, likes, queries):
+    for query in queries:
+        post_no, like_increase = query
+        likes[post_no - 1] += like_increase
+
+        # Find the post with the highest likes
+        max_likes = likes[0]
+        max_post = 1
+
+        for i in range(1, n):
+            if likes[i] > max_likes or (likes[i] == max_likes and i + 1 < max_post):
+                max_likes = likes[i]
+                max_post = i + 1
+
+        # Print the result
+        print(max_post, max_likes)
+        return max_post, max_likes
+
+
 def test_manage_patients():
     # Test Case 1: Basic example with different severity scores
     patients_1 = [
@@ -83,3 +102,16 @@ def test_manage_patients():
 
 if __name__ == '__main__':
     test_manage_patients()
+
+
+    # Example Input for task-2
+    n, m = 5, 3  # Number of posts and queries
+    likes = [10, 20, 30, 40, 50]  # Initial likes
+    queries = [
+        (3, 25),  # Post 3 gets 25 more likes
+        (2, 35),  # Post 2 gets 35 more likes
+        (5, 10)   # Post 5 gets 10 more likes
+    ]
+
+    # Run the function
+    facebook_likes(n, m, likes, queries)
